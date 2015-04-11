@@ -58,9 +58,8 @@ namespace System.Extensions
 
         public static string EncryptWithPassword(this string value, string password)
         {
-
-            Check.String.IsNotNullOrWhiteSpace(value);
-            Check.String.IsNotNullOrWhiteSpace(password);
+            Check.Object.IsNotNull(value);
+            Check.Object.IsNotNull(password);
 
             byte[] plainTextBytes = Encoding.UTF8.GetBytes(value);
 
@@ -86,6 +85,9 @@ namespace System.Extensions
 
         public static string DecryptWithPassword(this string value, string password)
         {
+            Check.Object.IsNotNull(value);
+            Check.Object.IsNotNull(password);
+
             byte[] cipherTextBytes = Convert.FromBase64String(value);
             byte[] keyBytes = new Rfc2898DeriveBytes(password, Encoding.ASCII.GetBytes(SaltKey)).GetBytes(256 / 8);
             var symmetricKey = new RijndaelManaged() { Mode = CipherMode.CBC, Padding = PaddingMode.None };

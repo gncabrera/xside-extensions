@@ -23,7 +23,7 @@ namespace System.Extensions.Test
          [Test]
         public void ICanEncryptAndDecryptWithAPassword()
         {
-            string password = null;
+            string password = "my-super-password";
             string randomString = "raaaaaaaaaaaaandom";
 
             var encrypted = randomString.EncryptWithPassword(password);
