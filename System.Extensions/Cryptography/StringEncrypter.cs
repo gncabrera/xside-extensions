@@ -9,7 +9,7 @@ namespace System.Extensions
 {
     public static class StringEncrypter
     {
-        public static string GenerateSaltedSHA1(this string value, string salt)
+        public static string EncryptWithSalt(this string value, string salt)
         {
             HashAlgorithm algorithm = new SHA1Managed();
 
@@ -50,6 +50,16 @@ namespace System.Extensions
                 byteArrayResult[byteArray1.Length + i] = byteArray2[i];
 
             return byteArrayResult;
+        }
+
+        public static string EncryptWithPassword(this string value, string password)
+        {
+            return value + password;
+        }
+
+        public static string DecryptWithPassword(this string value, string password)
+        {
+            return value.Replace(password, "");
         }
     }
 }
