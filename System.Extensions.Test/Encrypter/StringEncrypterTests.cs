@@ -1,6 +1,7 @@
 ﻿using System;
 using NUnit.Framework;
 
+
 namespace System.Extensions.Test
 {
     [TestFixture]
@@ -22,7 +23,7 @@ namespace System.Extensions.Test
          [Test]
         public void ICanEncryptAndDecryptWithAPassword()
         {
-            string password = "my-super-password";
+            string password = null;
             string randomString = "raaaaaaaaaaaaandom";
 
             var encrypted = randomString.EncryptWithPassword(password);
@@ -43,6 +44,15 @@ namespace System.Extensions.Test
             var decrypted = encrypted.DecryptWithPassword(password);
 
             Assert.AreEqual(randomString, decrypted);
+
+        }
+
+        [Test]
+        [ExpectedException(typeof(EncryptionException))]
+        public void TryingToDecryptionInvalidStringBreaks()
+        {
+            var decrypted = "foo".DecryptWithPassword("bar");
+
 
         }
     }

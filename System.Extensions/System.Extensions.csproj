@@ -43,9 +43,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Checker\EnumerableChecker.cs" />
+    <Compile Include="Checker\ObjectChecker.cs" />
+    <Compile Include="Checker\StringChecker.cs" />
+    <Compile Include="Cryptography\Crypto.cs" />
     <Compile Include="Cryptography\EncryptionException.cs" />
     <Compile Include="Cryptography\StringEncrypter.cs" />
     <Compile Include="Exceptions\AttributeNotFoundException.cs" />
+    <Compile Include="Checker\Check.cs" />
     <Compile Include="Exceptions\MethodNotFoundException.cs" />
     <Compile Include="Exceptions\PropertyNotFoundException.cs" />
     <Compile Include="Extensions\DynamicExtensions.cs" />
