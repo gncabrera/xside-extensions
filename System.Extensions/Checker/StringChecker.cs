@@ -24,7 +24,7 @@ namespace System.Extensions
         /// If the provided value is empty or null, a System.ArgumentException is raised with a specified error message 
         /// and the name of the parameter that causes this exception.
         /// </summary>
-        /// <param name="obj">The string to be checked.</param>
+        /// <param name="value">The string to be checked.</param>
         /// <param name="paramName">The name of the parameter that causes this exception.</param>
         /// <param name="message">The error message that explains the reason for the exception.</param>
         /// <exception cref="System.ArgumentException">System.ArgumentException</exception>
@@ -38,7 +38,7 @@ namespace System.Extensions
         /// If the provided value is empty, null or consists only of white-space characters, 
         /// a System.ArgumentException is raised.
         /// </summary>
-        /// <param name="obj">The string to be checked.</param>
+        /// <param name="value">The string to be checked.</param>
         /// <exception cref="System.ArgumentException">System.ArgumentException</exception>
         public void IsNotNullOrWhiteSpace(string value)
         {
@@ -53,7 +53,7 @@ namespace System.Extensions
         /// a System.ArgumentException is raised with a specified error message 
         /// and the name of the parameter that causes this exception.
         /// </summary>
-        /// <param name="obj">The string to be checked.</param>
+        /// <param name="value">The string to be checked.</param>
         /// <param name="paramName">The name of the parameter that causes this exception.</param>
         /// <param name="message">The error message that explains the reason for the exception.</param>
         /// <exception cref="System.ArgumentException">System.ArgumentException</exception>

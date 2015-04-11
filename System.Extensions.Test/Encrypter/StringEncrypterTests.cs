@@ -11,7 +11,7 @@ namespace System.Extensions.Test
         public void ICanEncryptSHASaltString()
         {
             string password = "my-super-password";
-            string salt = password.GenerateSalt(38);
+            string salt = password.GenerateSalt(50);
             string encrypted = password.EncryptWithSalt(salt);
 
 
@@ -34,16 +34,15 @@ namespace System.Extensions.Test
         }
 
         [Test]
-        [ExpectedException(typeof(EncryptionException))]
-        public void DecryptionWithWrongPasswordBreaks()
+        public void DecryptionWithWrongPasswordReturnsInvalidValue()
         {
             string password = "my-super-password";
             string randomString = "raaaaaaaaaaaaandom";
 
             var encrypted = randomString.EncryptWithPassword(password);
-            var decrypted = encrypted.DecryptWithPassword(password);
+            var decrypted = encrypted.DecryptWithPassword("my-wrong-super-password");
 
-            Assert.AreEqual(randomString, decrypted);
+            Assert.AreNotEqual(randomString, decrypted);
 
         }
 
@@ -52,8 +51,6 @@ namespace System.Extensions.Test
         public void TryingToDecryptionInvalidStringBreaks()
         {
             var decrypted = "foo".DecryptWithPassword("bar");
-
-
         }
     }
 }
