@@ -47,6 +47,7 @@
     <Compile Include="Checker\ObjectChecker.cs" />
     <Compile Include="Checker\StringChecker.cs" />
     <Compile Include="Cryptography\EncryptionException.cs" />
+    <Compile Include="Cryptography\PropertiesFileEncrypter.cs" />
     <Compile Include="Cryptography\StringEncrypter.cs" />
     <Compile Include="Exceptions\AttributeNotFoundException.cs" />
     <Compile Include="Checker\Check.cs" />

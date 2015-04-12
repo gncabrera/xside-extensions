@@ -72,6 +72,7 @@
     <Compile Include="Checker\EnumerableCheckerTests.cs" />
     <Compile Include="Checker\ObjectCheckerTests.cs" />
     <Compile Include="Checker\StringCheckerTests.cs" />
+    <Compile Include="Encrypter\PropertiesFileEncrypterTests.cs" />
     <Compile Include="Encrypter\StringEncrypterTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

@@ -10,6 +10,13 @@ namespace System.Extensions
 {
     public static class StringEncrypter
     {
+        /// <summary>
+        /// Encrypts a string using a SHA1 + Salt. The salt must be generated preiously with
+        /// the StringEncrypter.GenerateSalt() method
+        /// </summary>
+        /// <param name="value">The value to be encrypted.</param>
+        /// <param name="salt">A valid salt.</param>
+        /// <returns>The encrypted value</returns>
         public static string EncryptWithSalt(this string value, string salt)
         {
             HashAlgorithm algorithm = new SHA1Managed();

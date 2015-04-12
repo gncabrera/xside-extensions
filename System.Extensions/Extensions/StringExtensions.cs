@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Linq;
 using System.Linq.Expressions;
@@ -58,6 +59,18 @@ namespace System.Extensions
             return result;
         }
 
+        public static string Base64Encoded(this string value)
+        {
+            var plainTextBytes = System.Text.Encoding.UTF8.GetBytes(value);
+            return System.Convert.ToBase64String(plainTextBytes);
+        }
+
+        public static string Base64Decoded(this string value)
+        {
+            var base64EncodedBytes = System.Convert.FromBase64String(value);
+            return System.Text.Encoding.UTF8.GetString(base64EncodedBytes);
+        }
+
         public static string FirstLetterToLower(this string str)
         {
             if (str == null)
@@ -68,6 +81,46 @@ namespace System.Extensions
 
             return str.ToLower();
         }
+
+        public static string JoinWithComma(this IEnumerable<string> enumerable)
+        {
+            Check.Object.IsNotNull(enumerable);
+            return Join(enumerable, ", ");
+        }
+
+        public static string JoinWithNewLine(this IEnumerable<string> enumerable)
+        {
+            Check.Object.IsNotNull(enumerable);
+            return Join(enumerable, Environment.NewLine);
+        }
+
+        public static string JoinWithComma(this Dictionary<string, string> dictionary)
+        {
+            Check.Object.IsNotNull(dictionary);
+            return Join(dictionary, ", ");
+        }
+
+        public static string JoinWithNewLine(this Dictionary<string, string> dictionary)
+        {
+            Check.Object.IsNotNull(dictionary);
+            return Join(dictionary, Environment.NewLine);
+        }
+
+
+        private static string Join(IEnumerable<string> enumerable, string separator)
+        {
+            Check.Object.IsNotNull(enumerable);
+            Check.Object.IsNotNull(separator);
+            return string.Join(separator, enumerable);
+        }
+
+        private static string Join(Dictionary<string, string> dictionary,string separator)
+        {
+            Check.Object.IsNotNull(dictionary);
+            Check.Object.IsNotNull(separator);
+            return string.Join(separator, dictionary.Select(pair => pair.Key + ": " + pair.Value));
+        }
+
     }
 }
 
