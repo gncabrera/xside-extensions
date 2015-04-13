@@ -12,6 +12,7 @@ namespace System.Extensions
         public static ObjectChecker Object { get { return new ObjectChecker(); } }
         public static StringChecker String { get { return new StringChecker(); } }
         public static EnumerableChecker Enumerable { get { return new EnumerableChecker(); } }
+        public static DictionaryChecker Dictionary { get { return new DictionaryChecker(); } }
 
         internal static void ThrowArgumentException(string message, string delfaultMessage, string paramName)
         {

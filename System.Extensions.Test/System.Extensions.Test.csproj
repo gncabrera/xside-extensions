@@ -72,6 +72,7 @@
     <Compile Include="Checker\EnumerableCheckerTests.cs" />
     <Compile Include="Checker\ObjectCheckerTests.cs" />
     <Compile Include="Checker\StringCheckerTests.cs" />
+    <Compile Include="Configuration\DefaultConfigurationTests.cs" />
     <Compile Include="Encrypter\PropertiesFileEncrypterTests.cs" />
     <Compile Include="Encrypter\StringEncrypterTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -83,6 +84,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
   <Choose>

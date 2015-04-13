@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.ComponentModel;
+using System.Globalization;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
@@ -119,6 +120,21 @@ namespace System.Extensions
             Check.Object.IsNotNull(dictionary);
             Check.Object.IsNotNull(separator);
             return string.Join(separator, dictionary.Select(pair => pair.Key + ": " + pair.Value));
+        }
+
+        public static T ConvertTo<T>(this string value, T defaultValue = default(T))
+        {
+            Check.Object.IsNotNull(value);
+
+            if (value != null)
+            {
+                TypeConverter converter = TypeDescriptor.GetConverter(typeof(T));
+                return (T)converter.ConvertFromString(null, CultureInfo.InvariantCulture, value);
+            }
+            else
+            {
+                return defaultValue;
+            }
         }
 
     }

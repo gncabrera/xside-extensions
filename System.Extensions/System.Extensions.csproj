@@ -35,6 +35,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -43,9 +44,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Checker\DictionaryChecker.cs" />
     <Compile Include="Checker\EnumerableChecker.cs" />
     <Compile Include="Checker\ObjectChecker.cs" />
     <Compile Include="Checker\StringChecker.cs" />
+    <Compile Include="Configuration\ConfigurationLoader.cs" />
+    <Compile Include="Configuration\DefaultConfiguration.cs" />
     <Compile Include="Cryptography\EncryptionException.cs" />
     <Compile Include="Cryptography\PropertiesFileEncrypter.cs" />
     <Compile Include="Cryptography\StringEncrypter.cs" />

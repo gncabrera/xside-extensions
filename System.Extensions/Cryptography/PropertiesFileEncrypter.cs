@@ -12,7 +12,7 @@ namespace System.Extensions
         public PropertiesFileEncrypter(string keyFile)
         {
             Check.String.IsNotNullOrWhiteSpace(keyFile);
-            if (!File.Exists(keyFile)) throw new EncryptionException("File [" + KeyFile + "] does not exist.");
+            if (!File.Exists(keyFile)) throw new EncryptionException("File [" + keyFile + "] does not exist.");
             KeyFile = keyFile;
             MasterPassword = "MasterPassword".Base64Encoded();
         }
