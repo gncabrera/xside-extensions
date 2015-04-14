@@ -68,6 +68,17 @@ namespace Configuration_Helper
             Console.WriteLine();
             Console.WriteLine();
 
+            // A nice way to keep all the configuration ordered is to write a wrapper like MyConfiguration and add all your settings there
+
+            Console.WriteLine("Getting data from MyConfiguration: ");
+            Console.WriteLine("AppSettings_MyKeyTest: " + MyConfiguration.AppSettings_MyKeyTest);
+            Console.WriteLine("SectionA_MyKeyTest: " + MyConfiguration.SectionA_MyKeyTest);
+            Console.WriteLine("SectionB_MyKeyTest: " + MyConfiguration.SectionB_MyKeyTest);
+            Console.WriteLine("KeysFile_Token: " + MyConfiguration.KeysFile_Token);
+
+            Console.WriteLine();
+            Console.WriteLine();
+
             Console.WriteLine("Hit ENTER to exit");
             Console.ReadLine();
         }
