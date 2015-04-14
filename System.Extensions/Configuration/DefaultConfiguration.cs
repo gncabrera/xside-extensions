@@ -99,7 +99,7 @@ namespace System.Extensions
 
             public void LoadKeysFile(string path)
             {
-                LoadFullKeyFile(path, null);
+                LoadKeysFile(path, null);
             }
 
             public void LoadKeysFile(string path, string masterPassword)
@@ -113,8 +113,7 @@ namespace System.Extensions
                 var appDataPath = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
                 path = path.StartsWith(@"\") ? path.Substring(1) : path;
                 var finalPath = appDataPath + @"\" + path;
-                CheckKeyFile();
-                LoadFullKeyFile(path, masterPassword);
+                LoadKeysFile(finalPath, masterPassword);
             }
 
             public void LoadKeysFileFromAppData(string path)

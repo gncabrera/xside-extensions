@@ -25,11 +25,11 @@ namespace System.Extensions.Test.Configuration
             if (File.Exists(TestFile))
                 File.Delete(TestFile);
 
-            File.WriteAllLines(TestFile, new List<string> { "MyKeyTest=55" });
+            File.WriteAllLines(TestFile, new List<string> { "MyKeyTest=88" });
 
-            DefaultConfiguration.LoadConfiguration().LoadKeysFileFromAppData(TestFile);
+            DefaultConfiguration.LoadConfiguration().LoadKeysFile(TestFile);
             var actual = DefaultConfiguration.GetKeysFileValue<int>("MyKeyTest");
-            Assert.AreEqual(55, actual);
+            Assert.AreEqual(88, actual);
         }
 
         [Test]
