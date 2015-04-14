@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.Configuration;
@@ -11,18 +12,18 @@ namespace System.Extensions
 {
     public class DefaultConfiguration
     {
-        public static Dictionary<string, string> KeyFile { get; private set; }
+        public static Dictionary<string, string> KeysFile { get; private set; }
         public static Dictionary<string, string> AppSettings { get; private set; }
         public static Dictionary<string, Dictionary<string, string>> Sections { get; private set; }
 
-        public static T GetKeyFileValue<T>(string key, T defaultValue = default(T))
+        public static T GetKeysFileValue<T>(string key, T defaultValue = default(T))
         {
             try
             {
-                Check.Object.IsNotNull(KeyFile, "The configuration wasn't loaded correctly");
-                Check.Enumerable.HasElements(KeyFile, null, "The Key File has not any keys");
-                Check.Dictionary.HasKey(KeyFile, key, "key", "The Key file does not contain the key [" + key + "]");
-                return KeyFile[key].ConvertTo<T>(defaultValue);
+                Check.Object.IsNotNull(KeysFile, "The configuration wasn't loaded correctly");
+                Check.Enumerable.HasElements(KeysFile, null, "The Key File has not any keys");
+                Check.Dictionary.HasKey(KeysFile, key, "key", "The Key file does not contain the key [" + key + "]");
+                return KeysFile[key].ConvertTo<T>(defaultValue);
             }
             catch (Exception e)
             {
@@ -96,18 +97,18 @@ namespace System.Extensions
                 }
             }
 
-            public void LoadKeyFile(string path)
+            public void LoadKeysFile(string path)
             {
                 LoadFullKeyFile(path, null);
             }
 
-            public void LoadKeyFile(string path, string masterPassword)
+            public void LoadKeysFile(string path, string masterPassword)
             {
                 CheckKeyFile();
                 LoadFullKeyFile(path, masterPassword);
             }
 
-            public void LoadKeyFileFromAppData(string path, string masterPassword)
+            public void LoadKeysFileFromAppData(string path, string masterPassword)
             {
                 var appDataPath = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
                 path = path.StartsWith(@"\") ? path.Substring(1) : path;
@@ -116,9 +117,9 @@ namespace System.Extensions
                 LoadFullKeyFile(path, masterPassword);
             }
 
-            public void LoadKeyFileFromAppData(string path)
+            public void LoadKeysFileFromAppData(string path)
             {
-                LoadKeyFileFromAppData(path, null);
+                LoadKeysFileFromAppData(path, null);
             }
 
             private void LoadFullKeyFile(string path, string masterPassword)
@@ -133,14 +134,14 @@ namespace System.Extensions
 
                 foreach (var prop in fileLoader.Properties)
                 {
-                    KeyFile.Add(prop.Key, prop.Value);
+                    KeysFile.Add(prop.Key, prop.Value);
                 }
             }
 
             private void CheckKeyFile()
             {
-                KeyFile = KeyFile ?? new Dictionary<string, string>();
-                if (KeyFile.Any())
+                KeysFile = KeysFile ?? new Dictionary<string, string>();
+                if (KeysFile.Any())
                     throw new ConfigurationErrorsException("KeyFile is already loaded");
 
             }
@@ -153,16 +154,40 @@ namespace System.Extensions
                 foreach (var section in sections)
                 {
                     if (Sections.ContainsKey(section)) continue; //skipping repeated sections
-                    var nameValues = (NameValueCollection)ConfigurationManager.GetSection(section);
-
+                    var obtainedSection = ConfigurationManager.GetSection(section);
                     var newSection = new Dictionary<string, string>();
-                    foreach (var name in nameValues.AllKeys)
+
+                    if (obtainedSection is NameValueCollection)
                     {
-                        newSection.Add(name, nameValues[name]);
+                        var nameValues = (NameValueCollection)obtainedSection;
+                        foreach (var name in nameValues.AllKeys)
+                        {
+                            newSection.Add(name, nameValues[name]);
+                        }
+                    }
+                    else if (obtainedSection is Hashtable)
+                    {
+                        var dictionary = (Hashtable)obtainedSection;
+                        foreach (string key in dictionary.Keys)
+                        {
+                            newSection.Add(key, (string)dictionary[key]);
+                        }
+                    }
+                    else
+                    {
+                        throw new ConfigurationErrorsException("The configuration type [" + obtainedSection.GetType().FullName + "] is not recognized.");
                     }
                     Sections.Add(section, newSection);
                 }
             }
+        }
+
+        public static void Clean()
+        {
+            KeysFile = null;
+            AppSettings = null;
+            Sections = null;
+
         }
     }
 }

@@ -11,6 +11,13 @@ namespace System.Extensions.Test.Configuration
     [TestFixture]
     class DefaultConfigurationTests
     {
+
+        [SetUp]
+        public void Setup()
+        {
+            DefaultConfiguration.Clean();
+        }
+
         [Test]
         public void ICanLoadAndGetKeyFile()
         {
@@ -20,8 +27,8 @@ namespace System.Extensions.Test.Configuration
 
             File.WriteAllLines(TestFile, new List<string> { "MyKeyTest=55" });
 
-            DefaultConfiguration.LoadConfiguration().LoadKeyFileFromAppData(TestFile);
-            var actual = DefaultConfiguration.GetKeyFileValue<int>("MyKeyTest");
+            DefaultConfiguration.LoadConfiguration().LoadKeysFileFromAppData(TestFile);
+            var actual = DefaultConfiguration.GetKeysFileValue<int>("MyKeyTest");
             Assert.AreEqual(55, actual);
         }
 
@@ -34,10 +41,18 @@ namespace System.Extensions.Test.Configuration
         }
 
         [Test]
-        public void ICanLoadAndGetSpecificSection()
+        public void ICanLoadAndGetSpecificNameValueSection()
         {
             DefaultConfiguration.LoadConfiguration().LoadSections("test-section");
             var actual = DefaultConfiguration.GetSectionValue<bool>("test-section", "MyKeyTest");
+            Assert.IsTrue(actual);
+        }
+
+        [Test]
+        public void ICanLoadAndGetSpecificDictionarySection()
+        {
+            DefaultConfiguration.LoadConfiguration().LoadSections("test-section-dic");
+            var actual = DefaultConfiguration.GetSectionValue<bool>("test-section-dic", "MyKeyTest");
             Assert.IsTrue(actual);
         }
     }

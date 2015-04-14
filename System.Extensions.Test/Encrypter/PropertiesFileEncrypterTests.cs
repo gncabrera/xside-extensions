@@ -16,7 +16,7 @@ namespace System.Extensions.Test.Checker
         public string TestFile { get { return Directory.GetCurrentDirectory() + @"\PropertiesFileEncrypterTest.key"; } }
         public List<string> TestFileLines { get { return File.ReadAllLines(TestFile).ToList(); } }
 
-       
+
         [SetUp]
         public void Setup()
         {
@@ -80,6 +80,24 @@ namespace System.Extensions.Test.Checker
                 Assert.Fail("Unexpected exception was thrown");
             }
             encrypter.LoadProperties();
+        }
+
+        [Test]
+        public void LinesWithNonAlphanumericKeysBreak()
+        {
+            SetupTestFile("prop1=foo", "&&testkey=bar", "test.key=123456");
+            PropertiesFileEncrypter encrypter = null;
+            encrypter = new PropertiesFileEncrypter(TestFile);
+            try
+            {
+                encrypter.LoadProperties();
+            }
+            catch (Exception e)
+            {
+                var msg = e.InnerException.Message;
+                Assert.IsFalse(msg.Contains("test.key"));
+                Assert.IsTrue(msg.Contains("testkey"));
+            }
         }
 
         [Test]

@@ -11,14 +11,11 @@ namespace System.Extensions
     public static class ReflectionExtensions
     {
         /// <summary>
-        /// Retorna las propiedades y sus atributos para poder utilizarlos relacionados uno a uno.
-        /// Si una property tiene más de un attribute del tipo especificado, utilizará el primero.
+        /// All properties and their AttributeType will be returnedd for the specified Type.
         /// </summary>
-        /// <typeparam name="Type">Tipo en el cual se inspeccionarán las properties que 
-        /// contengan el attribute AttributeType.</typeparam>
-        /// <typeparam name="AttributeType">Tipo de attribute de las properties que serán seleccionadas.</typeparam>
-        /// <returns>Diccionario que tiene como claves las instancias de los atributos de cada
-        /// property; y como valor la property con la que se corresponde.</returns>
+        /// <typeparam name="Type">The type with the Attribute AttributeType where the properties will be searched</typeparam>
+        /// <typeparam name="AttributeType">Type of the the attribute that the properties must have to be returned.</typeparam>
+        /// <returns>List with all the properties of the type with the AttributeType and the instance of the AttributeType assigned to them</returns>
         public static IList<AttributeMemberPair<AttributeType, PropertyInfo>> InspectProperties<AttributeType>(this Type type)
         {
             var properties = type.GetProperties();

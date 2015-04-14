@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace System.Extensions
@@ -14,7 +15,7 @@ namespace System.Extensions
             Check.String.IsNotNullOrWhiteSpace(keyFile);
             if (!File.Exists(keyFile)) throw new EncryptionException("File [" + keyFile + "] does not exist.");
             KeyFile = keyFile;
-            MasterPassword = "MasterPassword".Base64Encoded();
+            MasterPassword = "BYG5fCNmzDP62QRwcBDP8szxSacZaOi6cViEZhq4U0U8WQvDG5".Base64Encoded();
         }
 
         public PropertiesFileEncrypter(string keyFile, string masterPassword)
@@ -28,6 +29,9 @@ namespace System.Extensions
         public Dictionary<string, string> Properties { get; private set; }
         public string MasterPassword { get; private set; }
 
+        /// <summary>
+        /// Loads the properties from the file with a master password if specified. See the documentation for more information
+        /// </summary>
         public void LoadProperties()
         {
             if (!File.Exists(KeyFile)) throw new EncryptionException("File [" + KeyFile + "] does not exist.");
@@ -64,14 +68,25 @@ namespace System.Extensions
                         continue;
                     }
 
-                    var key = line.Substring(0, idx);
-                    var value = line.Substring(idx +1);
-                    if (parsedLines.ContainsKey(key))
+                    var key = line.Substring(0, idx).Trim();
+                    var value = line.Substring(idx + 1).Trim();
+
+
+                    Regex r = new Regex(@"^[a-zA-Z0-9.\-]*$");
+                    if (r.IsMatch(key))
                     {
-                        invalidLines.Add("The key [" + key + "] is repeated");
-                        continue;
+                        if (parsedLines.ContainsKey(key))
+                        {
+                            invalidLines.Add("The key [" + key + "] is repeated");
+                            continue;
+                        }
+                        parsedLines.Add(key, value);
                     }
-                    parsedLines.Add(key, value);
+                    else
+                    {
+                        invalidLines.Add("The key [" + key + "] is is not valid. Only alphanumeric and '.' characters are allowed");
+
+                    }
                 }
                 else
                 {
@@ -130,6 +145,6 @@ namespace System.Extensions
             }
         }
 
-       
+
     }
 }

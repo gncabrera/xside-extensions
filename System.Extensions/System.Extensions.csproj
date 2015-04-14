@@ -50,7 +50,7 @@
     <Compile Include="Checker\StringChecker.cs" />
     <Compile Include="Configuration\ConfigurationLoader.cs" />
     <Compile Include="Configuration\DefaultConfiguration.cs" />
-    <Compile Include="Cryptography\EncryptionException.cs" />
+    <Compile Include="Exceptions\EncryptionException.cs" />
     <Compile Include="Cryptography\PropertiesFileEncrypter.cs" />
     <Compile Include="Cryptography\StringEncrypter.cs" />
     <Compile Include="Exceptions\AttributeNotFoundException.cs" />

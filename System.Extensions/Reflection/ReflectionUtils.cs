@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace System.Extensions
 {
-    public static class ReflectionUtils
+    internal static class ReflectionUtils
     {
         /// <summary>
         /// Filtra los miembros pasados por parámetros segun tengan o no el attributo especificado y los relaciona

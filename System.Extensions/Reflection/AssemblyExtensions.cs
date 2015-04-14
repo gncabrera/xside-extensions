@@ -21,7 +21,7 @@ namespace System.Extensions
             return Path.GetDirectoryName(path);
         }
 
-        public static string CodeBaseString(this Assembly assembly)
+        private static string CodeBaseString(this Assembly assembly)
         {
             string codeBase = assembly.CodeBase;
             UriBuilder uri = new UriBuilder(codeBase);
