@@ -2,13 +2,13 @@
 <package >
   <metadata>
     <id>XSide.System.Extensions</id>
-    <version>1.2.2</version>
+    <version>1.2.3</version>
     <title>XSide.System.Extensions</title>
     <authors>Gustavo Cabrera</authors>
     <owners>XSide Solutions</owners>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>Basic extensions and utilities. Extensions and utilities for string, ienumerable, reflection, etc.</description>
-    <releaseNotes>Added Configuration helper and many more extensions.</releaseNotes>
+    <releaseNotes>Fixed some bugs.</releaseNotes>
 	<projectUrl>https://github.com/gncabrera/xside-extensions</projectUrl>
     <copyright>Copyright 2014</copyright>
     <tags>extensions reflection utilities toolbox</tags>
