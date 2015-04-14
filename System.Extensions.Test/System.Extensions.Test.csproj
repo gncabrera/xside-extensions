@@ -75,6 +75,7 @@
     <Compile Include="Configuration\DefaultConfigurationTests.cs" />
     <Compile Include="Encrypter\PropertiesFileEncrypterTests.cs" />
     <Compile Include="Encrypter\StringEncrypterTests.cs" />
+    <Compile Include="Extensions\StringExtensionsTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

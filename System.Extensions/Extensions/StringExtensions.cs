@@ -14,85 +14,53 @@ namespace System.Extensions
     public static class StringExtensions
     {
 
-       
-
+        /// <summary>
+        /// Encodes the string to a base64 string
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
         public static string Base64Encoded(this string value)
         {
             var plainTextBytes = System.Text.Encoding.UTF8.GetBytes(value);
             return System.Convert.ToBase64String(plainTextBytes);
         }
 
+        /// <summary>
+        /// Decodes the base64 string to a plain string
+        /// </summary>
         public static string Base64Decoded(this string value)
         {
             var base64EncodedBytes = System.Convert.FromBase64String(value);
             return System.Text.Encoding.UTF8.GetString(base64EncodedBytes);
         }
 
-        public static string FirstLetterToLower(this string str)
+        /// <summary>
+        /// Converts the string to the specified type
+        /// </summary>
+        public static T ConvertTo<T>(this string value)
         {
-            if (str == null)
-                return null;
-
-            if (str.Length > 1)
-                return char.ToUpper(str[0]) + str.Substring(1);
-
-            return str.ToLower();
+            TypeConverter converter = TypeDescriptor.GetConverter(typeof(T));
+            return (T)converter.ConvertFromString(null, CultureInfo.InvariantCulture, value);
         }
 
-        public static string JoinWithComma(this IEnumerable<string> enumerable)
+        /// <summary>
+        /// Converts the string to the specified type. If there is any error, the default value will be returned
+        /// </summary>
+        public static T ConvertTo<T>(this string value, T defaultValue)
         {
-            Check.Object.IsNotNull(enumerable);
-            return Join(enumerable, ", ");
-        }
-
-        public static string JoinWithNewLine(this IEnumerable<string> enumerable)
-        {
-            Check.Object.IsNotNull(enumerable);
-            return Join(enumerable, Environment.NewLine);
-        }
-
-        public static string JoinWithComma(this Dictionary<string, string> dictionary)
-        {
-            Check.Object.IsNotNull(dictionary);
-            return Join(dictionary, ", ");
-        }
-
-        public static string JoinWithNewLine(this Dictionary<string, string> dictionary)
-        {
-            Check.Object.IsNotNull(dictionary);
-            return Join(dictionary, Environment.NewLine);
-        }
-
-
-        private static string Join(IEnumerable<string> enumerable, string separator)
-        {
-            Check.Object.IsNotNull(enumerable);
-            Check.Object.IsNotNull(separator);
-            return string.Join(separator, enumerable);
-        }
-
-        private static string Join(Dictionary<string, string> dictionary,string separator)
-        {
-            Check.Object.IsNotNull(dictionary);
-            Check.Object.IsNotNull(separator);
-            return string.Join(separator, dictionary.Select(pair => pair.Key + ": " + pair.Value));
-        }
-
-        public static T ConvertTo<T>(this string value, T defaultValue = default(T))
-        {
-            Check.Object.IsNotNull(value);
-
-            if (value != null)
+            try
             {
-                TypeConverter converter = TypeDescriptor.GetConverter(typeof(T));
-                return (T)converter.ConvertFromString(null, CultureInfo.InvariantCulture, value);
+                return ConvertTo<T>(value);
             }
-            else
+            catch (Exception)
             {
                 return defaultValue;
             }
         }
 
+        /// <summary>
+        /// Converts the string to the specified type
+        /// </summary>
         public static object ConvertTo(this string value, Type type)
         {
             // Get default value for type so if string
@@ -115,6 +83,21 @@ namespace System.Extensions
             }
 
             return result;
+        }
+
+        /// <summary>
+        /// Converts the string to the specified type. If there is any error, the default value will be returned
+        /// </summary>
+        public static object ConvertTo(this string value, Type type, object defaultValue)
+        {
+            try
+            {
+                return ConvertTo(value, type);
+            }
+            catch (Exception)
+            {
+                return defaultValue;
+            }
         }
 
     }

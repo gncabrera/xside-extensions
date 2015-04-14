@@ -60,6 +60,8 @@
     <Compile Include="Extensions\DynamicExtensions.cs" />
     <Compile Include="Extensions\IEnumerableExtensions.cs" />
     <Compile Include="Extensions\StringExtensions.cs" />
+    <Compile Include="Extensions\StringJoinsExtensions.cs" />
+    <Compile Include="Extensions\StringSpecificExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Reflection\AssemblyExtensions.cs" />
     <Compile Include="Reflection\AttributeMemberPair.cs" />
