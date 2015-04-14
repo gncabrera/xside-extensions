@@ -53,7 +53,7 @@ namespace Configuration_Helper
 
             // Loads the specified keys file. The first run will encrypt all unencrypted keys
             var keysFile = Directory.GetCurrentDirectory() + @"\myKeys.key";
-            DefaultConfiguration.LoadConfiguration().LoadKeysFile(keysFile);
+            DefaultConfiguration.LoadConfiguration().LoadKeysFile(keysFile, "myPassword");
 
             // Loads the specified key file from %APPDATA%\folder\my-file
             //DefaultConfiguration.LoadConfiguration().LoadKeysFileFromAppData(@"folder\my-file.key"); 

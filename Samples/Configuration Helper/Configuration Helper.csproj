@@ -36,7 +36,7 @@
     <Reference Include="System.Core" />
     <Reference Include="System.Extensions, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>packages\XSide.System.Extensions.1.2.1\lib\net45\System.Extensions.dll</HintPath>
+      <HintPath>packages\XSide.System.Extensions.1.2.2\lib\net45\System.Extensions.dll</HintPath>
     </Reference>
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
