@@ -59,6 +59,7 @@
     <Compile Include="Exceptions\PropertyNotFoundException.cs" />
     <Compile Include="Extensions\DynamicExtensions.cs" />
     <Compile Include="Extensions\IEnumerableExtensions.cs" />
+    <Compile Include="Extensions\EnumExtensions.cs" />
     <Compile Include="Extensions\StringExtensions.cs" />
     <Compile Include="Extensions\StringJoinsExtensions.cs" />
     <Compile Include="Extensions\StringSpecificExtensions.cs" />
