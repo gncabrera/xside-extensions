@@ -22,8 +22,16 @@ namespace System.Extensions
             {
                 Check.Object.IsNotNull(KeysFile, "The configuration wasn't loaded correctly");
                 Check.Enumerable.HasElements(KeysFile, null, "The Key File has not any keys");
-                Check.Dictionary.HasKey(KeysFile, key, "key", "The Key file does not contain the key [" + key + "]");
-                return KeysFile[key].ConvertTo<T>(defaultValue);
+                try
+                {
+                    Check.Dictionary.HasKey(KeysFile, key, "key", "The Key file does not contain the key [" + key + "]");
+                    return KeysFile[key].ConvertTo<T>(defaultValue);
+                }
+                catch (Exception)
+                {
+                    return defaultValue;
+                }
+                
             }
             catch (Exception e)
             {
@@ -35,7 +43,7 @@ namespace System.Extensions
 
         private static void HandleException(Exception e)
         {
-            throw new ConfigurationErrorsException("An error has ocurred while trying to obtain a key");
+            throw new ConfigurationErrorsException("An error has ocurred while trying to obtain a key", e);
         }
 
         public static T GetAppSettingsValue<T>(string key, T defaultValue = default(T))
@@ -44,8 +52,15 @@ namespace System.Extensions
             {
                 Check.Object.IsNotNull(AppSettings, "The configuration wasn't loaded correctly");
                 Check.Enumerable.HasElements(AppSettings, null, "The AppSettings has not any keys");
-                Check.Dictionary.HasKey(AppSettings, key, "key", "The AppSettings does not contain the key [" + key + "]");
-                return AppSettings[key].ConvertTo<T>(defaultValue);
+                try
+                {
+                    Check.Dictionary.HasKey(AppSettings, key, "key", "The AppSettings does not contain the key [" + key + "]");
+                    return AppSettings[key].ConvertTo<T>(defaultValue);
+                }
+                catch (Exception)
+                {
+                    return defaultValue;
+                }
             }
             catch (Exception e)
             {
@@ -66,9 +81,19 @@ namespace System.Extensions
 
                 Check.Object.IsNotNull(Sections, "The configuration wasn't loaded correctly for section [" + section + "]");
                 Check.Enumerable.HasElements(Sections, null, "The section [" + section + "] has not any keys");
-                Check.Dictionary.HasKey(values, key, "section", "The section [" + section + "] does not contain the key [" + key + "]");
 
-                return values[key].ConvertTo<T>(defaultValue);
+                try
+                {
+                    Check.Dictionary.HasKey(values, key, "section", "The section [" + section + "] does not contain the key [" + key + "]");
+
+                    return values[key].ConvertTo<T>(defaultValue);
+                }
+                catch (Exception)
+                {
+
+                    return defaultValue;
+                }
+               
             }
             catch (Exception e)
             {
@@ -154,6 +179,8 @@ namespace System.Extensions
                 {
                     if (Sections.ContainsKey(section)) continue; //skipping repeated sections
                     var obtainedSection = ConfigurationManager.GetSection(section);
+                    if (obtainedSection == null)
+                        throw new ConfigurationErrorsException("The section [" + section + "] does not exists.");
                     var newSection = new Dictionary<string, string>();
 
                     if (obtainedSection is NameValueCollection)
