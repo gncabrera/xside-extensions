@@ -36,7 +36,7 @@ namespace System.Extensions.Test.Checker
         public void ATypeConvertionToManyTypesWorks()
         {
             Assert.AreEqual(1234, "1234".ConvertTo(typeof(int)));
-            Assert.AreEqual(12.34, "12,34".ConvertTo(typeof(decimal)));
+            Assert.AreEqual(12.34, "12,34".ConvertTo(typeof(decimal))); //TODO: check language
             Assert.AreEqual(true, "true".ConvertTo(typeof(bool)));
             Assert.AreEqual(true, "TruE".ConvertTo(typeof(bool)));
         }
