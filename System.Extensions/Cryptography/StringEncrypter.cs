@@ -1,4 +1,5 @@
-﻿using System;
+﻿using EnsureThat;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -65,8 +66,8 @@ namespace System.Extensions
 
         public static string EncryptWithPassword(this string value, string password)
         {
-            Check.Object.IsNotNull(value);
-            Check.Object.IsNotNull(password);
+            Ensure.That(value, "value").IsNotNull();
+            Ensure.That(password, "password").IsNotNull();
 
             try
             {
@@ -100,9 +101,8 @@ namespace System.Extensions
 
         public static string DecryptWithPassword(this string value, string password)
         {
-            Check.Object.IsNotNull(value);
-            Check.Object.IsNotNull(password);
-
+            Ensure.That(value, "value").IsNotNull();
+            Ensure.That(password, "password").IsNotNull();
             try
             {
                 byte[] cipherTextBytes = Convert.FromBase64String(value);

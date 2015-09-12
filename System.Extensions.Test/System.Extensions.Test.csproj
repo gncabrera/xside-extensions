@@ -35,6 +35,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EnsureThat.vDinasour">
+      <HintPath>..\packages\Ensure.That.3.0.0\lib\portable-net4+sl5+netcore45+wpa81+wp8+MonoAndroid1+MonoTouch1\EnsureThat.vDinasour.dll</HintPath>
+    </Reference>
     <Reference Include="nunit.core">
       <HintPath>..\packages\NUnitTestAdapter.2.0.0\lib\nunit.core.dll</HintPath>
       <Private>False</Private>
@@ -70,15 +73,14 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
-    <Compile Include="Checker\EnumerableCheckerTests.cs" />
-    <Compile Include="Checker\ObjectCheckerTests.cs" />
-    <Compile Include="Checker\StringCheckerTests.cs" />
-    <Compile Include="Configuration\DefaultConfigurationTests.cs" />
+    <Compile Include="Configuration\DefaultConfigurationTests_KeyFile.cs" />
+    <Compile Include="Configuration\DefaultConfigurationTests_AppSettings.cs" />
+    <Compile Include="Configuration\DefaultConfigurationTests_Sections.cs" />
     <Compile Include="Encrypter\PropertiesFileEncrypterTests.cs" />
     <Compile Include="Encrypter\StringEncrypterTests.cs" />
+    <Compile Include="Ensure.That\EnsureDictionaryParamTests.cs" />
     <Compile Include="Extensions\EnumExtensionsTests.cs" />
     <Compile Include="Extensions\StringExtensionsTests.cs" />
-    <Compile Include="Properties Reader\PropertiesTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -90,10 +92,8 @@
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
-    <None Include="Properties Reader\TestData.properties">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
   </ItemGroup>
+  <ItemGroup />
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
       <ItemGroup>

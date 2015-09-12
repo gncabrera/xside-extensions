@@ -1,4 +1,5 @@
-﻿using System;
+﻿using EnsureThat;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -12,7 +13,7 @@ namespace System.Extensions
     {
         public PropertiesFileEncrypter(string keyFile)
         {
-            Check.String.IsNotNullOrWhiteSpace(keyFile);
+            Ensure.That(keyFile, "Key File").IsNotNullOrWhiteSpace();
             if (!File.Exists(keyFile)) throw new EncryptionException("File [" + keyFile + "] does not exist.");
             KeyFile = keyFile;
             MasterPassword = "BYG5fCNmzDP62QRwcBDP8szxSacZaOi6cViEZhq4U0U8WQvDG5".Base64Encoded();
@@ -21,7 +22,7 @@ namespace System.Extensions
         public PropertiesFileEncrypter(string keyFile, string masterPassword)
             : this(keyFile)
         {
-            Check.String.IsNotEmptyOrNull(masterPassword);
+            Ensure.That(masterPassword, "Master Password").IsNotNullOrWhiteSpace();
             MasterPassword = masterPassword.Base64Encoded();
         }
 

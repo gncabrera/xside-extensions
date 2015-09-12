@@ -100,6 +100,21 @@ namespace System.Extensions
             }
         }
 
+        /// <summary>
+        /// Simple way to call a string.Format(str, args)
+        /// </summary>
+        public static string Inject(this string format, params object[] formattingArgs)
+        {
+            return string.Format(format, formattingArgs);
+        }
+
+        /// <summary>
+        /// Simple way to call a string.Format(str, args)
+        /// </summary>
+        public static string Inject(this string format, params string[] formattingArgs)
+        {
+            return string.Format(format, formattingArgs.Select(a => a as object).ToArray());
+        }
     }
 }
 
