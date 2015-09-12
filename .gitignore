@@ -1,3 +1,4 @@
 /packages/
 /TestResults/
 *.ncrunchsolution
+/_NCrunch_XSide.System.Extensions/
