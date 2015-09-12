@@ -35,8 +35,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="EnsureThat.vDinasour">
-      <HintPath>..\packages\Ensure.That.3.0.0\lib\portable-net4+sl5+netcore45+wpa81+wp8+MonoAndroid1+MonoTouch1\EnsureThat.vDinasour.dll</HintPath>
+    <Reference Include="EnsureThat.vDinasour, Version=3.1.0.32013, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Ensure.That.3.1.0\lib\portable-net4+sl5+netcore45+wpa81+wp8+MonoAndroid1+MonoTouch1\EnsureThat.vDinasour.dll</HintPath>
     </Reference>
     <Reference Include="nunit.core">
       <HintPath>..\packages\NUnitTestAdapter.2.0.0\lib\nunit.core.dll</HintPath>
