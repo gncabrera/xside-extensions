@@ -2,3 +2,4 @@
 /TestResults/
 *.ncrunchsolution
 /_NCrunch_XSide.System.Extensions/
+*.System.Extensions.ncrunchsolution.user

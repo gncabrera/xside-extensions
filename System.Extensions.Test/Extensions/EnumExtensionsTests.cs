@@ -20,6 +20,17 @@ namespace System.Extensions.Test.Extensions
             Assert.AreEqual("MyPropertyWithEmptyDescription", Foo.MyPropertyWithEmptyDescription.GetDescription());
         }
 
+        [Test]
+        public void ICanGetAllValuesOfAnEnum()
+        {
+            var values = EnumHelper.GetValues<Foo>();
+            Assert.AreEqual(4, values.Count());
+            Assert.IsTrue(values.Any(v => v == Foo.MyPropertyWithDescription));
+            Assert.IsTrue(values.Any(v => v == Foo.MyPropertyWithSpecificDescription));
+            Assert.IsTrue(values.Any(v => v == Foo.MyPropertyWithoutDescription));
+            Assert.IsTrue(values.Any(v => v == Foo.MyPropertyWithEmptyDescription));
+        }
+
         enum Foo {
             [System.ComponentModel.Description]
             MyPropertyWithDescription,

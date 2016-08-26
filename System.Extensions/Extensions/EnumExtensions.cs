@@ -19,11 +19,16 @@ namespace System.Extensions
 
             if (attributes != null && attributes.Length > 0 && !string.IsNullOrWhiteSpace(attributes[0].Description))
                 return attributes[0].Description;
-            else 
+            else
                 return EnumValue.ToString();
         }
 
-        public static IEnumerable<T> GetValues<T>()
+
+    }
+
+    public static class EnumHelper
+    {
+        public static IEnumerable<T> GetValues<T>() where T : struct
         {
             // Can't use type constraints on value types, so have to do check like this
             if (typeof(T).BaseType != typeof(Enum))

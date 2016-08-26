@@ -10,8 +10,17 @@ namespace System.Extensions
 {
     public static class ReflectionExtensions
     {
+        public static object GetDefault(this Type type)
+        {
+            if (type.IsValueType)
+            {
+                return Activator.CreateInstance(type);
+            }
+            return null;
+        }
+
         /// <summary>
-        /// All properties and their AttributeType will be returnedd for the specified Type.
+        /// All properties and their AttributeType will be returned for the specified Type.
         /// </summary>
         /// <typeparam name="Type">The type with the Attribute AttributeType where the properties will be searched</typeparam>
         /// <typeparam name="AttributeType">Type of the the attribute that the properties must have to be returned.</typeparam>
@@ -160,7 +169,7 @@ namespace System.Extensions
         /// <summary>
         /// Retorna true si el tipo puede ser asignado a una variable de tipo "SuperType"
         /// </summary>
-        public static bool SubtypeOf<SuperType>(this Type type)
+        public static bool IsSubtypeOf<SuperType>(this Type type)
         {
             return typeof(SuperType).IsAssignableFrom(type);
         }
